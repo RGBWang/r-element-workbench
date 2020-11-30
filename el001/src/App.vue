@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <sidebar  @select="select"></sidebar>
+    <sidebar class="sidebar" @select="select"></sidebar>
     <div class="contentdiv">
  <brandpage v-show="activePage=='brandpage'"></brandpage>
     <mapeditor v-show="activePage=='mapeditor'"></mapeditor>
@@ -39,11 +39,17 @@ body{
 }
 #app{
      height: 100vh;
-     display: grid;
-     grid-template-columns: auto 1fr;
+     display: flex;
+     flex-direction:  row;
      background-color: #f0f2f5;
 }
 .contentdiv{
   height: 100%;
+  flex: 1 1 auto;
+}
+.sidebar{
+  flex: 0 0 auto;
+    width: 175px;
+    min-width: 175px;
 }
 </style>

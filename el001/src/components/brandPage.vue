@@ -5,11 +5,19 @@
       <el-button type="danger">删除</el-button>
       <el-button type="primary" icon="el-icon-search">搜索</el-button>
     </div>
+    <div class="tableHeader">
+        <div class="column1">行号</div>
+        <div class="column2">名称</div>
+        <div class="column3">Logo</div>
+        <div class="column4">首字母</div>
+        <div class="column5H">描述详情</div>
+        <div class="column6">操作</div>
+    </div>
     <div class="datatable">
-      <el-table
+      <!-- <el-table
         ref="multipleTable"
         :data="dataStage"
-          :row-style="{height: '30px'}"
+          :cell-style="'localcell'"
       >
         <el-table-column type="index" width="50"> </el-table-column>
         <el-table-column type="selection" width="55"> </el-table-column>
@@ -23,8 +31,23 @@
           label="首字母"
           width="180"
         ></el-table-column>
-        <el-table-column prop="Desc" label="详情"> </el-table-column>
-      </el-table>
+        <el-table-column prop="Desc" label="详情描述"> </el-table-column>
+      </el-table> -->
+      <div class="datarow" v-for="(item,index) in dataStage">
+         <div class="column1">{{index+1}}</div>
+        <div class="column2">{{item.Name}}</div>
+        <div class="column3">
+        <el-image class="img" v-show="hasImage(item.Logo)" :src="toImageUri(item.Logo)" :lazy="true" :fit="'contain'" ></el-image>
+        </div>
+        <div class="column4">{{item.Initial}}</div>
+        <div class="column5">
+          <div class="multiText">{{item.Desc}}</div>
+
+        </div>
+        <div class="column6">
+            <el-button type="primary">编辑</el-button>
+        </div>
+      </div>
     </div>
     <div class="pagination">
          <el-pagination
@@ -70,6 +93,16 @@ export default {
           }
           
         }
+      },
+      toImageUri(uri){
+        if(this.hasImage(uri)==false){
+          return null;
+        }
+        return `http://47.99.206.102:8410/image?uri=${uri}&height=30`
+        console.log(uri);
+      },
+      hasImage(uri){
+        return uri&&uri!="";
       }
   },
   computed:{
@@ -96,7 +129,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .flexcontainer {
   display: flex;
   flex-direction: column;
@@ -108,6 +141,7 @@ export default {
 .datatable {
   flex: 1 1 120px;
   overflow-y: scroll;
+  margin-left: 30px;
 }
 .commandBar {
   background-color: #eef1f6;
@@ -123,9 +157,61 @@ export default {
 .pagination {
   flex: 0 0 50px;
   text-align: center;
+     border-Top: 1px solid #eee;
 }
 
-.locacell{
-  max-height: 30px;
+.tableHeader{
+  font-weight: bold;
+  display: flex;
+  color: #909090;
+  margin-left: 30px;
+  border-bottom: 1px solid #aaa;
+  height: 36px;
+  align-items: center;
+}
+.datarow{
+   display: flex;
+    height: 30px;
+       text-overflow: ellipsis;
+    overflow: hidden;
+      border-bottom: 1px solid #eee;
+      align-items: center;
+      text-align: left;
+}
+.column1{
+  width: 80px;
+  flex: 0 0 auto;
+}
+.column2{
+   width: 150px;
+    flex: 0 0 auto;
+}
+.column3{
+    flex: 0 0 150px;
+ 
+}
+.img{
+   height: 30px;
+   vertical-align: middle;
+}
+.column4{
+   width: 80px;
+    flex: 0 0 auto;
+}
+.column5H{
+  flex: 1 1 auto;
+}
+.column5{
+  flex: 1 1 auto;
+  align-self: start;
+
+}
+.column5>div{
+  line-height: 30px;
+  padding-right: 10px;
+}
+.column6{
+   width: 100px;
+  flex: 0 0 auto;
 }
 </style>

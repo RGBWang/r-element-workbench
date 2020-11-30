@@ -59,7 +59,11 @@ export default {
 };
 </script>
 
-<style>
+
+<style scoped>
+  .el-menu-vertical-demo{
+    border: none;
+  }
   .leftBar{
     background-color: #1f2d3d;
     height: 100%;
@@ -68,7 +72,7 @@ export default {
   }
 
   .fixWidth{
-     width: 175px;
+   
      overflow: hidden;
   }
 
