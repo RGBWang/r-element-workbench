@@ -39,6 +39,7 @@ body{
 }
 #app{
      height: 100vh;
+     width: 100vw;
      display: flex;
      flex-direction:  row;
      background-color: #f0f2f5;
@@ -46,6 +47,7 @@ body{
 .contentdiv{
   height: 100%;
   flex: 1 1 auto;
+	overflow: hidden;
 }
 .sidebar{
   flex: 0 0 auto;
